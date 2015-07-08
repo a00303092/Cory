@@ -31,10 +31,6 @@
         if (image) {
             selectedItem = Frost.ItemManager.getItemByImage(image);
             console.log("Selected item:", selectedItem);
-            if (selectedItem && selectedItem.linkedTo) {
-                selectedItem.linkedTo.linkedItem = undefined;
-                selectedItem.linkedTo = undefined;
-            }
         }
     }
 
