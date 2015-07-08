@@ -28,6 +28,30 @@ Frost.Item.prototype.addImages = function(imgSrcList) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+Frost.Item.prototype.getCollider = function() {
+    return this.front[0];
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Frost.Item.prototype.collide = function() {
+    for(var i=0, len=this.collisions.length; i < len; ++i) {
+        var collision =this.collisions[i];
+        var imageA = collision.image;
+        var imageB = this.getCollider();
+        if (Frost.Renderer.checkCollision(imageB, imageA)) {
+            this.moveTo(imageA.x + collision.x, imageA.y + collision.y);
+            if (collision.link) {
+                selectedItem.linkedTo = Frost.ItemManager.getItemByImage(imageA);
+                selectedItem.linkedTo.linkedItem = selectedItem;
+            }
+            break;
+        }
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 Frost.Item.prototype.moveBy = function(x, y) {
     this.images.forEach(function(image) {
         image.x += x;

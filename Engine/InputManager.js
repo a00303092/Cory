@@ -40,19 +40,7 @@
 
     function handleMouseUp(e){
         if (selectedItem) {
-            for(var i=0, len=selectedItem.collisions.length; i < len; ++i) {
-                var collision =selectedItem.collisions[i];
-                var imageA = collision.image;
-                var imageB = selectedItem.front[0];
-                if (Frost.Renderer.checkCollision(imageB, imageA)) {
-                    selectedItem.moveTo(imageA.x + collision.x, imageA.y + collision.y);
-                    if (collision.link) {
-                        selectedItem.linkedTo = Frost.ItemManager.getItemByImage(imageA);
-                        selectedItem.linkedTo.linkedItem = selectedItem;
-                    }
-                    break;
-                }
-            }
+            selectedItem.collide();
             Frost.Renderer.render();
             selectedItem = undefined;
         }
