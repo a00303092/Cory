@@ -1,0 +1,1 @@
+[{"id":1,"top":0,"left":0,"collisions":[],"images":[{"filename":"BODY_1_X.GIF","z":1}]},{"id":2,"top":187,"left":55,"collisions":[{"top":187,"left":55,"item":1}],"images":[{"filename":"BELT_5B.GIF","z":0},{"filename":"BELT_5F.GIF","z":2}]}]
