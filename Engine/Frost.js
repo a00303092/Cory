@@ -48,7 +48,6 @@
         var reverseAssets = Frost.assets.slice().reverse();
         for (var i in reverseAssets) {
             var img = reverseAssets[i];
-            console.log(img.image.src);
             if (!img.visible)
                 continue;
 

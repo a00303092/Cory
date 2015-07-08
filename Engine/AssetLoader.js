@@ -2,28 +2,7 @@ window.Frost = window.Frost || {};
 (function(AssetLoader) {
     var imagesLoaded = 0;
 
-    AssetLoader.loadFront = function(src) {
-        var asset = findAsset(src);
-        if (asset) {
-            return asset;
-        }
-
-        asset = loadAsset(src);
-        Frost.assets.unshift(asset);
-        return asset;
-    };
-
-    AssetLoader.loadBack = function(src) {
-        var asset = findAsset(src);
-        if (asset)
-            return asset;
-
-        asset = loadAsset(src);
-        Frost.assets.push(asset);
-        return asset;
-    };
-
-    function findAsset(src) {
+    AssetLoader.findAsset = function(src) {
         for (var i = 0; i < Frost.assets.length; ++i) {
             var asset = Frost.assets[i];
             if (asset.image.src.indexOf(src) > -1) {
@@ -32,13 +11,17 @@ window.Frost = window.Frost || {};
         }
     }
 
+    AssetLoader.loadAssets = function(srcList) {
+      Frost.assets = srcList.map(loadAsset);
+    };
+
     function loadAsset(src) {
         var img = new Image();
         var frostImage = {
             x: 0,
             y: 0,
-            z: 0,
-            image: img
+            image: img,
+            visible: true
         };
 
         img.onload = function(){

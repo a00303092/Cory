@@ -50,15 +50,6 @@
                         selectedItem.linkedTo = Frost.ItemManager.getItemByImage(imageA);
                         selectedItem.linkedTo.linkedItem = selectedItem;
                     }
-
-                    if(collision.front.length > 0) {
-                        selectedItem.images.forEach(function(image) {
-                            image.visible = false;
-                        });
-                        collision.front.forEach(function(image) {
-                            image.visible = true;
-                        });
-                    }
                     break;
                 }
             }

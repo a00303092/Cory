@@ -4,63 +4,40 @@ window.Frost = window.Frost || {};
     var itemList = [];
 
     ItemManager.addItems = function(items) {
+        var imagesToLoad = [];
+        items.forEach(function(item) {
+            (item.front || []).forEach(function(imageSrc) {
+                imagesToLoad.push(imageSrc);
+            });
+            (item.back || []).forEach(function(imageSrc) {
+                imagesToLoad.unshift(imageSrc);
+            });
+        });
+        Frost.AssetLoader.loadAssets(imagesToLoad);
+
         items.forEach(function (item) {
-            itemList.push(new Frost.Item(item));
+            if (item.layer) {
+                var parentItem = ItemManager.getItemByImage(item.layer);
+                parentItem.addImages(item.front);
+            }
+            else
+                itemList.push(new Frost.Item(item));
         });
     };
 
-    function getImageBySrc(src) {
-        for (var i in Frost.assets) {
-            var image = Frost.assets[i];
-            if (image.image.src.indexOf(src) > -1) {
-                return image;
-            }
-        }
-    }
-
-    function pushUnique(array, item) {
-        if (array.indexOf(item) === -1)
-            array.push(item);
-    }
-
     ItemManager.onAssetsLoaded = function() {
-        //itemList.forEach(function(item) {
-        //    item.images = [];
-        //    (item.collisions || []).forEach(function(collision) {
-        //        (collision.front || []).forEach(function(imgSrc) {
-        //            var image = getImageBySrc(imgSrc);
-        //            image.visible = false;
-        //            pushUnique(item.images, image);
-        //        });
-        //    });
-        //
-        //    item.front.forEach(function(imgSrc) {
-        //        var image = getImageBySrc(imgSrc);
-        //        image.visible = true;
-        //        pushUnique(item.images, image);
-        //    });
-        //
-        //    item.back.forEach(function(imgSrc) {
-        //        var image = getImageBySrc(imgSrc);
-        //        image.visible = true;
-        //        pushUnique(item.images, image);
-        //    });
-        //
-        //    if (item.layer) {
-        //        var image = getImageBySrc(item.layer);
-        //        var layerItem = ItemManager.getItemByImage(image);
-        //        layerItem.images = layerItem.images.concat(item.images);
-        //    }
-        //});
+        console.log("All assets loaded");
         Frost.Renderer.render();
     };
 
     ItemManager.getItemByImage = function(image) {
+        if (typeof image == "string") {
+            image = Frost.AssetLoader.findAsset(image);
+        }
         for (var i in itemList) {
             var item = itemList[i];
             if (item.images.indexOf(image) > -1)
                 return item;
-            console.log(image.image.src);
         }
     }
 

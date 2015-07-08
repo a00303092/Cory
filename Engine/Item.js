@@ -7,29 +7,23 @@ Frost.Item = function(defenition) {
     this.collisions = [];
 
     var self = this;
-    this.front = (defenition.front || []).map(function (image) {
-        var loadedImage = Frost.AssetLoader.loadBack(image);
-        loadedImage.visible = true;
-        self.images.push(loadedImage);
-        return loadedImage;
-    });
+    this.front = (defenition.front || []).map(Frost.AssetLoader.findAsset);
+    this.back = (defenition.back || []).map(Frost.AssetLoader.findAsset);
+    this.images = this.front.concat(this.back);
 
     (defenition.collisions || []).forEach(function (collision) {
         self.collisions.push({
             x : collision.x,
             y : collision.y,
-            image : Frost.AssetLoader.loadBack(collision.image),
-            front : (collision.front || []).map(Frost.AssetLoader.loadBack)
+            image : Frost.AssetLoader.findAsset(collision.image)
         });
     });
+};
 
-    var reverseImages = (defenition.back || []).slice().reverse();
-    this.back = reverseImages.map(function (image) {
-        var loadedImage = Frost.AssetLoader.loadFront(image);
-        loadedImage.visible = true;
-        self.images.push(loadedImage);
-        return loadedImage;
-    });
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Frost.Item.prototype.addImages = function(imgSrcList) {
+    this.images = this.images.concat(imgSrcList.map(Frost.AssetLoader.findAsset));
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
