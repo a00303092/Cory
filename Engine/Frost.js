@@ -77,19 +77,17 @@
         if (!boxCollision)
             return false;
 
-        var width = (imageA.x + imageA.width);
-        var height = (imageB.x + imageB.height);
-
         ctx.clearRect(0,0,canvasWidth,canvasHeight);
         ctx.drawImage(imageA.image, imageA.x, imageA.y);
-        var dataA = ctx.getImageData(imageA.x, imageA.y,width, height);
+        var dataA = ctx.getImageData(imageA.x, imageA.y, imageA.width, imageA.height);
+
         buffer.clearRect(0,0,canvasWidth,canvasHeight);
         buffer.drawImage(imageB.image, imageB.x, imageB.y);
-        var dataB = buffer.getImageData(imageA.x, imageA.y,width, height);
+        var dataB = buffer.getImageData(imageA.x, imageA.y, imageA.width, imageA.height);
 
         for (var i = 3; i<dataA.data.length; i +=4) {
             if (dataB.data[i] > 0 && dataA.data[i] > 0) {
-                console.log(i, dataB.data[i], dataA.data[i])
+                console.log((i+1)/4, dataB.data[i], dataA.data[i])
                 return true;
             }
         }
