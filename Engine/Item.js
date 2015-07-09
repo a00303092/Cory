@@ -2,10 +2,15 @@ window.Frost = window.Frost || {};
 
 Frost.Item = function(defenition) {
 
+    this.name = defenition.name;
+    this.static = defenition.static || false;
     this.images = [];
     this.linkedTo = undefined;
     this.linkedItems = [];
     this.collisions = [];
+
+    this.equipped = false;
+    this.carried = false;
 
     var self = this;
     this.front = (defenition.front || []).map(Frost.AssetLoader.findAsset);
@@ -58,6 +63,9 @@ Frost.Item.prototype.collide = function() {
         this.linkedTo = undefined;
     }
 
+    this.equipped = false;
+    this.carried = false;
+
     for(var i=0, len=this.collisions.length; i < len; ++i) {
         var collision =this.collisions[i];
         var imageA = collision.image;
@@ -73,6 +81,12 @@ Frost.Item.prototype.collide = function() {
                 return;
             }
             this.moveTo(imageA.x + collision.x, imageA.y + collision.y);
+
+            if (imageA.image.src.indexOf("BODY") > -1)
+                this.equipped = true;
+            else
+                this.carried = true;
+
             if (collision.link) {
                 this.linkedTo = Frost.ItemManager.getItemByImage(imageA);
                 this.linkedTo.linkItem(this);

@@ -2,6 +2,7 @@
     Frost.ItemManager.addItems([
         {
             name: 'Body',
+            static: true,
             back: [
             ],
             front: [
@@ -125,6 +126,7 @@
         },
         {
             name: 'Hands',
+            static: true,
             back: [
             ],
             front: [
