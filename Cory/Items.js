@@ -90,13 +90,27 @@
             back: [
             ],
             front: [
-                "DAGGR1H1.GIF",
-                "DAGGR1B1.GIF"
+                "DAGGR1B1.GIF",
+                "DAGGR1H1.GIF"
             ],
             collisions: [
-                {image: "SHEATHD1.GIF", x: 1, y:0, front:["DAGGR1H2.GIF", "DAGGR2B2.GIF"], link:true},
-                {image: "BODY2.GIF", x: -27, y:187, front:["DAGGR1H1.GIF", "DAGGR1B1.GIF"]},
-                {image: "BODY3.GIF", x: 150, y:116, front:["DAGGR1H1.GIF", "DAGGR1B1.GIF"]}
+                {image: "SHEATHD1.GIF", x: 1, y:0, replaceWith:"DAGGR1H2.GIF", link:true},
+                {image: "BODY2.GIF", x: -27, y:187},
+                {image: "BODY3.GIF", x: 150, y:116}
+            ]
+        },
+        {
+            name: 'Knife',
+            back: [
+            ],
+            front: [
+                "DAGGR2B2.GIF",
+                "DAGGR1H2.GIF"
+            ],
+            collisions: [
+                {image: "SHEATHD1.GIF", x: 1, y:0, link:true},
+                {image: "BODY2.GIF", x: -27, y:187, replaceWith:"DAGGR1H1.GIF"},
+                {image: "BODY3.GIF", x: 150, y:116, replaceWith:"DAGGR1H1.GIF"}
             ]
         },
         {

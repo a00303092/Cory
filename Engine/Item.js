@@ -17,6 +17,7 @@ Frost.Item = function(defenition) {
             x : collision.x,
             y : collision.y,
             link: collision.link,
+            replaceWith: collision.replaceWith,
             image : Frost.AssetLoader.findAsset(collision.image)
         });
     });
@@ -62,15 +63,39 @@ Frost.Item.prototype.collide = function() {
         var imageA = collision.image;
         var imageB = this.getCollider();
         if (Frost.Renderer.checkCollision(imageB, imageA)) {
+            if (collision.replaceWith) {
+                console.log("replacing");
+                this.hide();
+                var replacer = Frost.ItemManager.getItemByImage(collision.replaceWith);
+                replacer.moveTo(imageA.x + collision.x, imageA.y + collision.y);
+                replacer.collide();
+                replacer.show();
+                return;
+            }
             this.moveTo(imageA.x + collision.x, imageA.y + collision.y);
-            console.log(collision);
             if (collision.link) {
                 this.linkedTo = Frost.ItemManager.getItemByImage(imageA);
                 this.linkedTo.linkItem(this);
             }
-            break;
+            return;
         }
     }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Frost.Item.prototype.hide = function() {
+    this.images.forEach(function(image) {
+        image.visible = false;
+    })
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Frost.Item.prototype.show = function() {
+    this.images.forEach(function(image) {
+        image.visible = true;
+    })
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
