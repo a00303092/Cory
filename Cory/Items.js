@@ -91,8 +91,8 @@
             back: [
             ],
             front: [
-                "DAGGR1B1.GIF",
-                "DAGGR1H1.GIF"
+                "DAGGR1H1.GIF",
+                "DAGGR1B1.GIF"
             ],
             collisions: [
                 {image: "SHEATHD1.GIF", x: 1, y:0, replaceWith:"DAGGR1H2.GIF", link:true},
@@ -105,8 +105,8 @@
             back: [
             ],
             front: [
-                "DAGGR2B2.GIF",
-                "DAGGR1H2.GIF"
+                "DAGGR1H2.GIF",
+                "DAGGR2B2.GIF"
             ],
             collisions: [
                 {image: "SHEATHD1.GIF", x: 1, y:0, link:true},

@@ -5,7 +5,7 @@ window.Frost = window.Frost || {};
 
     ItemManager.hasItem = function(string) {
         for (var i = 0; i < itemList.length; ++i) {
-            if (itemList[i].name.indexOf(string) > -1)
+            if (itemList[i].equipped && itemList[i].name.indexOf(string) > -1)
                 return true;
         }
         return false;
@@ -15,7 +15,7 @@ window.Frost = window.Frost || {};
         itemList.forEach(function(item) {
             if (!(item.equipped || item.carried || item.static))
                 item.hide();
-        })
+        });
         Frost.Renderer.render();
     };
 
