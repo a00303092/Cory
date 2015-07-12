@@ -11,7 +11,9 @@
                 "BODY1.GIF",
                 "HAIRBLKS.GIF",
                 "BODYLIPS.GIF",
-                "BODY2.GIF"
+                "BODY2.GIF",
+                "BODY1_NP.GIF",
+                "BODY1_NL.GIF"
             ]
         },
         {
