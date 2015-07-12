@@ -115,6 +115,9 @@ Frost.Item.prototype.show = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Frost.Item.prototype.moveBy = function(x, y) {
+    if (this.static)
+        return;
+    
     this.images.forEach(function(image) {
         image.x += x;
         image.y += y;
