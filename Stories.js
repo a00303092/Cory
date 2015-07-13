@@ -12,7 +12,8 @@
         //    }.bind(this))
         //},
         click: function() {
-            this.props.nextPassage(this.props.passage, this.props.children);
+            //this.props.nextPassage(this.props.passage, this.props.children);
+            Frost.StoryManager.nextPassage(this.props.passage, this.props.children);
         },
         formatText: function() {
             if (this.props.req === undefined)
@@ -21,7 +22,7 @@
                 return "[" + this.props.req + "] " + this.props.children;
         },
         render: function() {
-            if (this.props.req === undefined || Doll.hasProperty(this.props.req))
+            if (this.props.req === undefined || Frost.ItemManager.hasItem(this.props.req))
                 return <a href='#'onClick={this.click}>{this.formatText()}</a>
             else
                 return <a href='#' style={{color:"grey"}}>{this.formatText()}</a>
@@ -92,7 +93,7 @@
         )}
     });
 
-    Cory.StoryManager.register(React.createClass({
+    Frost.StoryManager.register(React.createClass({
         render: function() { return (
             <div>
                 <p>"Well, look what we have here. It not be safe to wander down here".</p>
@@ -102,7 +103,7 @@
                 <p>"Bagor not had a juicy woman for a long time". He is eyeing you from head to toe, drooling.</p>
                 <Replacer nextPassage={this.props.nextPassage}>
                     <StoryLink nextPassage={this.props.nextPassage} passage={surrender}>Surrender</StoryLink><br/>
-                    <StoryLink nextPassage={this.props.nextPassage} req='Noisy'>Run away!</StoryLink>
+                    <StoryLink nextPassage={this.props.nextPassage} req='Knife'>Run away!</StoryLink>
                 </Replacer>
             </div>
         )}
@@ -140,7 +141,7 @@
         )}
     });
 
-    Cory.StoryManager.register(React.createClass({
+    Frost.StoryManager.register(React.createClass({
         componentDidMount: function() {
             Doll.Events.on('unequipped', function() {
                 this.props.nextPassage(jumped);

@@ -1,37 +1,7 @@
 
 (function( Cory, $, undefined ) {
 
-    var passages = [];
-
-    Cory.StoryManager = {};
-    Cory.StoryManager.register = function(passage) {
-        passages.push(passage);
-    };
-
-    var Story = React.createClass({
-        getInitialState: function() {
-            return {passage: passages[0]};
-        },
-
-        nextPassage: function(passage) {
-            if (passage != undefined) {
-                this.setState({passage: passage});
-            }
-            else{
-                var index = Math.floor((Math.random() * passages.length));
-                this.setState({passage: passages[index]});
-            }
-        },
-
-       render: function() {
-           if (this.state.passage)
-               return React.createElement(this.state.passage,{nextPassage:this.nextPassage});
-           else
-               return <a href='#' onClick={function(){this.nextPassage();}.bind(this)}>Click Here to Start</a>
-       }
-    });
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     var Attributes = React.createClass({
         //componentDidMount: function() {
@@ -142,7 +112,7 @@
                     <div className="col-md-7">
                         <div className="panel panel-default">
                             <div className="panel-body">
-                            <Story />
+                            <Frost.StoryManager.Story />
                             </div>
                         </div>
                     </div>
