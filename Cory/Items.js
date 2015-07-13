@@ -127,6 +127,19 @@
             ]
         },
         {
+            name: 'Long Sword',
+            back: [
+            ],
+            front: [
+                "SWORD1H1.GIF",
+                "SWORD1B1.GIF"
+            ],
+            collisions: [
+                //{image: "SHEATHD1.GIF", x: 1, y:0, replaceWith:"DAGGR1H2.GIF", link:true},
+                {image: "BODY2.GIF", x: -160, y:186}
+            ]
+        },
+        {
             name: 'Hands',
             static: true,
             back: [

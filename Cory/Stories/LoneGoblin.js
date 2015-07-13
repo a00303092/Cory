@@ -2,6 +2,27 @@
 
 (function(StoryManager) {
 
+    var backstab = React.createClass({
+        render: function() { return (
+            <div>
+                <p>You manage to carefully sneak up behind the oblivious goblin.</p>
+
+                <StoryManager.StoryLink>Strange the goblin with your bare hands</StoryManager.StoryLink>
+            </div>
+        )}
+    });
+
+    var charge = React.createClass({
+        render: function() { return (
+            <div>
+                <p>You charge up to the goblin slashing your sword at the little creature.</p>
+                <p>Youre slash opens the goblin's gut, who is now frantically trying to keep his innards in. It is to no avail. Its intestines litter the ground and it keels over dead.</p>
+
+                <StoryManager.StoryLink>Move on before any more goblins show up</StoryManager.StoryLink>
+            </div>
+        )}
+    });
+
     var sneak = React.createClass({
         render: function() { return (
             <div>
@@ -23,7 +44,7 @@
 
                 <StoryManager.Replacer>
                     <StoryManager.StoryLink passage={sneak}>Sneak up on the goblin</StoryManager.StoryLink><br/>
-                    <StoryManager.StoryLink req='Sword'>Charge the goblin</StoryManager.StoryLink>
+                    <StoryManager.StoryLink passage={charge} req='Sword'>Charge the goblin</StoryManager.StoryLink>
                 </StoryManager.Replacer>
             </div>
         )}
